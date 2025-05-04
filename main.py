@@ -30,8 +30,8 @@ def generate_post():
     history = get_cricket_history()
     news = get_latest_news()
 
-    content = f\"\"\"---
-title: \"Cricket Daily - {DATE_DISPLAY}\"
+    content = f"""---
+title: "Cricket Daily - {DATE_DISPLAY}"
 date: {datetime.datetime.now().isoformat()}
 ---
 
@@ -40,13 +40,13 @@ date: {datetime.datetime.now().isoformat()}
 
 ## 📰 Latest Cricket News
 {chr(10).join(news)}
-\"\"\"
+"""
 
-    filename = OUTPUT_DIR / f\"{datetime.datetime.now().strftime('%Y-%m-%d')}-cricket-daily.md\"
-    with open(filename, \"w\") as f:
+    filename = OUTPUT_DIR / f"{datetime.datetime.now().strftime('%Y-%m-%d')}-cricket-daily.md"
+    with open(filename, "w") as f:
         f.write(content.strip())
 
-    print(f\"✅ Post generated: {filename}\")
+    print(f"✅ Post generated: {filename}")
 
-if __name__ == \"__main__\":
+if __name__ == "__main__":
     generate_post()
