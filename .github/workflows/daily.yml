@@ -3,11 +3,12 @@ name: Daily Cricket Bot
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 6 * * *'  # Runs every day at 6:00 UTC
+    - cron: '0 6 * * *'  # Runs daily at 6:00 UTC
 
 jobs:
   run-daily-script:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,12 +23,3 @@ jobs:
 
       - name: Run script
         run: python main.py
-
-
-      - name: Commit changes
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-          git add _posts/
-          git commit -m "📰 Daily cricket post: $(date +'%Y-%m-%d')" || echo "No changes to commit"
-          git push
